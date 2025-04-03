@@ -1,0 +1,6 @@
+fastapi
+redis
+celery
+uvicorn
+python-dotenv
+pydantic-settings
