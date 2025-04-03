@@ -17,5 +17,13 @@ services:
     volumes:
       - redis_data:/data
 
+  worker:
+    build: .
+    command: celery -A app.celery.worker.celery worker --loglevel=info
+    depends_on:
+      - redis
+    env_file:
+      - .env
+
 volumes:
   redis_data:
