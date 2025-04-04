@@ -28,9 +28,8 @@ PAYLOAD = {
     "count": 10
 }
 
+
 async def get_datura_tweets(query: str):
     PAYLOAD["query"] = query
     response = httpx.post(URL, json=PAYLOAD, headers=HEADERS)
-    # print(response.status_code)
-    # print(response.json())
-    return response
+    return response.json()
