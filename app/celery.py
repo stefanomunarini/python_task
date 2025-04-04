@@ -12,3 +12,4 @@ celery = Celery(
     broker=REDIS_URL,
     backend=REDIS_URL
 )
+celery.autodiscover_tasks(["app.tasks.datura"])
