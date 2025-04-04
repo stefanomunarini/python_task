@@ -1,8 +1,11 @@
+import os
+
 from celery import Celery
+from dotenv import load_dotenv
 
-from app.config import get_settings
+load_dotenv()
 
-REDIS_URL = get_settings().redis_url
+REDIS_URL = os.getenv("REDIS_URL")
 
 celery = Celery(
     "worker",
