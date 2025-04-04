@@ -15,10 +15,11 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+RUN pip install -r requirements.txt
+
+COPY . .
 
 ENV PYTHONPATH=/app
 
 # TODO Before submitting remove --reload + add workers?
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--log-level", "trace"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
