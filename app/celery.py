@@ -13,3 +13,4 @@ celery = Celery(
     backend=REDIS_URL
 )
 celery.autodiscover_tasks(["app.tasks.datura"])
+celery.autodiscover_tasks(["app.tasks.chutes"])

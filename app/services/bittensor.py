@@ -2,7 +2,9 @@ import asyncio
 import logging
 
 from async_substrate_interface import AsyncSubstrateInterface
+from bittensor import subtensor as bt_subtensor
 from bittensor.core.chain_data.utils import decode_account_id
+from bittensor_wallet import Wallet
 from bittensor_wallet.utils import SS58_FORMAT
 from typing_extensions import Optional
 
@@ -63,3 +65,17 @@ async def fish(
             results = [v.value for _, v in result]
 
     return results, block_hash
+
+
+async def submit_stake_adjustment(action: str, netuid: int, hotkey: str, amount: float):
+    subtensor = bt_subtensor(network="finney")
+    wallet = Wallet(name="default", hotkey=hotkey)
+
+    if action == "stake":
+        result = await subtensor.add_stake(wallet=wallet, netuid=netuid, amount=amount)
+    elif action == "unstake":
+        result = await subtensor.unstake(wallet=wallet, netuid=netuid, amount=amount)
+    else:
+        raise ValueError("Invalid stake action")
+
+    return result
