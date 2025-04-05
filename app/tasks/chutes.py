@@ -1,5 +1,6 @@
 import asyncio
 import logging
+from typing import Dict, Any
 
 from app.celery import celery
 from app.services.bittensor import submit_stake_adjustment
@@ -13,7 +14,7 @@ def process_sentiment_task(
         tweets_response: dict,
         netuid: int = 18,
         hotkey: str = "5FFApaS75bv5pJHfAp2FVLBj9ZaXuFDjEypsaBNc1wCfe52v"
-) -> dict:
+) -> Dict[str, Any]:
     tweets = [
         tweet["text"]
         for tweet in tweets_response
@@ -24,7 +25,7 @@ def process_sentiment_task(
 
 
 @celery.task
-def submit_stake_adjustment_task(result: dict) -> dict:
+def submit_stake_adjustment_task(result: dict) -> Dict[str, Any]:
     sentiment = result["sentiment"]
     netuid = result["netuid"]
     hotkey = result["hotkey"]

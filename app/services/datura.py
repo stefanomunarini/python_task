@@ -1,5 +1,6 @@
 import logging
 import os
+from typing import Dict, Any
 
 import httpx
 from dotenv import load_dotenv
@@ -31,7 +32,7 @@ PAYLOAD = {
 }
 
 
-async def get_datura_tweets(query: str):
+async def get_datura_tweets(query: str) -> Dict[str, Any]:
     PAYLOAD["query"] = query
     async with httpx.AsyncClient() as client:
         response = await client.post(URL, json=PAYLOAD, headers=HEADERS)
