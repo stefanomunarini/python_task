@@ -33,6 +33,7 @@ PAYLOAD = {
 
 async def get_datura_tweets(query: str):
     PAYLOAD["query"] = query
-    response = httpx.post(URL, json=PAYLOAD, headers=HEADERS)
-    logger.info(response.json())
+    async with httpx.AsyncClient() as client:
+        response = await client.post(URL, json=PAYLOAD, headers=HEADERS)
+        response.raise_for_status()
     return response.json()

@@ -42,11 +42,7 @@ async def tao_dividends(
             raise HTTPException(status_code=500, detail=f"fish() failed: {e}")
 
         balance = results[0] if len(results) > 0 else 0
-        await set_cached_result(
-            cahce_key,
-            balance,
-            ttl=60*2
-        )
+        await set_cached_result(cahce_key, balance, ttl=60*2)
 
     if trade:
         chain(
