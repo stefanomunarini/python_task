@@ -4,3 +4,5 @@ celery
 uvicorn
 python-dotenv
 pydantic-settings
+bittensor
+httpx
