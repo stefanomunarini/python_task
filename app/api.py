@@ -8,18 +8,14 @@ from fastapi import APIRouter, Depends, HTTPException
 from app.auth import validate_token
 from app.redis import get_cached_result, set_cached_result
 from app.services.bittensor import fish
+from app.tasks.chutes import process_sentiment_task, \
+    submit_stake_adjustment_task
 from app.tasks.datura import get_datura_tweets_task
-from app.tasks.chutes import process_sentiment_task, submit_stake_adjustment_task
 
 load_dotenv()
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
-
-
-@router.get("/ping")
-async def ping():
-    return {"ping": "pong"}
 
 
 @router.get("/tao_dividends")
