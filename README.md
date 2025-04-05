@@ -43,5 +43,6 @@ The endpoint interacts with the Bittensor subnet to retrieve TaoDividends and re
 
 3) Due to time limitations, parsing the LLM response from chutes to extract the sentiment score value could not be completed (chute responses vary too much to be able to read the sentiment score). -> because of this, one of the tests is failing (test_chute.py)
 
+4) Due to time limitations, a stress load test is implemented, but it does not do much more than gather 1000 requests. A better approach would have been to test response time after X requests are sent.
 
 
